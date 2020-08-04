@@ -1,19 +1,19 @@
-import { Controller, Get, Query, Param, HttpCode, Req } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { CocktailService } from './cocktail.service';
+import { Cocktail } from './cocktail.entity';
 
 @Controller('cocktail')
 export class CocktailController {
   constructor(private cocktailService: CocktailService) { }
 
   @Get()
-  getRandom() {
-    return this.cocktailService.getRandom();
+  async getRandom() : Promise<Cocktail> {
+    return await this.cocktailService.getRandom();
   }
 
 
   @Get(":id")
-  getCocktail(@Param() params) {
-
-    return this.cocktailService.getDrink(params.id);
+  async getCocktail(@Param('id') id: number) : Promise<Cocktail> {
+    return await this.cocktailService.getDrink(id);
   }
 }

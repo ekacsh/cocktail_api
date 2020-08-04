@@ -1,16 +1,16 @@
 export class Cocktail {
    
 
-    static fromJson(json: object): Cocktail {
-        var newCocktail = new Cocktail();
-        newCocktail.id = json["idDrink"];
-        newCocktail.name = json["strDrink"];
+    static fromJson(json: Record<string, unknown>): Cocktail {
+        const newCocktail = new Cocktail();
+        newCocktail.id = json["idDrink"] as string;
+        newCocktail.name = json["strDrink"] as string;
 
-        newCocktail.instructions = json["strInstructions"];
+        newCocktail.instructions = json["strInstructions"] as string;
 
         newCocktail.ingredients = new Array<string>();
         for (let i = 1; i <= 15; i++) {
-            let ingredient = json["strIngredient" + i];
+            const ingredient = json["strIngredient" + i]  as string;
             if (ingredient != null) {
                 newCocktail.ingredients.push(ingredient);
             }
